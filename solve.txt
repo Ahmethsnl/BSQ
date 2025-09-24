@@ -1,0 +1,91 @@
+/*
+    stdlib - stdio
+
+    struct map -> rows, cols, empty, obs, full
+
+    min3 -> a , b , c
+
+    ft_strlen
+
+    parse first line -> file map
+        fscansf -> file , %d%c%c%c != 4
+        m->rows < 1
+        struct eşitlik kontrolü
+        struct printable kontrolü
+        
+    read grid -> file, *count
+        char **grid NULL
+        char *line NULL
+        size_t len 0
+        int read, n = 0
+        while -> read = getline -> &line, &len, file != -1
+            char **tmp = realloc -> grid, sizeof (char *) * (n + 1)
+            grid = tmp
+            grid[n] = line
+            line NULL
+            n++
+        *count = n
+        return grid
+
+    check grid -> grid, count, map
+        count -1 != m-> rows
+        int cols = ft_strlen -> grid[1]
+        if -> grid[1][cols - 1] == \n
+            cols--
+        m->cols = cols
+        for -> i = 1; i < count 
+            int len = ft_strlen -> grid[i]
+            if -> grid[i][len - 1] == \n 
+                len--
+            if -> len != m->cols
+                return 1
+    
+    mark square -> grid, row, col, size, map
+        for -> i = row - size + 1, i <= row
+            for -> j = col - size + 1, j <= col
+                grid[i][j] = m->full
+    
+    solve grid
+        check grid -> grid, count, m
+        int **dp = calloc -> rows, sizeof int *
+        for -> i = 0, i < m->rows
+            dp[i] = calloc -> cols, sizeof int
+        int max_size, best_row, best_col
+        for -> i = 0, i < m->rows
+            for -> j = 0, j < m->cols
+                char c = grid[i + 1][j]
+                if -> c == m->obs
+                    dp[i][j] = 0
+                else
+                    if -> i == 0 || j == 0 
+                        dp[i][j] = 1
+                    else
+                        dp[i][j] = 1 +min3 -> dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]
+                    if -> dp[i][j] > max_size
+                        max_size = dp[i][j]
+                        best col = j
+                        best row = i
+        if -> max size > 0
+            mark square -> grid, best row + 1, best col, max size, map
+        for -> i = 1, i < count
+            fputs -> grid[i], stdout
+    
+    process_stdin
+        process_file daki FILE  *file   fopen(filename, "r") bu satır hariç
+        geri kalan herşey aynı
+
+    process_file ->av[i] = filename
+        FILE  *file  = fopen -> filename, "r"
+        map m
+        int count = 0
+        parse first line -> file, &m
+        char **grid = read_grid -> file, &count
+        if -> !grid || count = 0 return 1
+        res = solve_grid ->grid, count, &m
+        return res
+
+    main
+        ac = 1 ? process_stdin : map error
+        ac > 1 ? process_file(av[i])  : map error
+        fputs(\n)
+*/
