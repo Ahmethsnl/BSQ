@@ -29,7 +29,7 @@ Bu depo, BSQ algoritmasının C dilinde bir uygulamasını içermektedir. Kod, `
 1. `bsq_ex/BSQ/` dizinine gidin.
 2. İlgili C dosyasını bir C derleyicisi kullanarak derleyin, örneğin:
    ```bash
-   gcc -o bsq bsq_208.c
+   gcc -o bsq bsq.c
    ```
 3. Derlenmiş programı çalıştırın:
    ```bash
@@ -47,3 +47,5 @@ Bu projeye algoritmayı geliştirerek, yeni özellikler ekleyerek veya kodu opti
 
 ## Lisans
 Bu proje açık kaynaklıdır ve MIT Lisansı altında sunulmaktadır.
+
+![BSQ Örneği](https://github.com/Ahmethsnl/BSQ/blob/main/bsq.png)
